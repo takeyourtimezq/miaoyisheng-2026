@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苗医生2026 · 本地生活深度经营 & 招商模式升级方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #4CAF50;
+            --accent-green: #81C784;
+            --bg-light: #F1F8E9;
+            --bg-white: #FFFFFF;
+            --text-dark: #1B5E20;
+            --text-gray: #558B2F;
+            --border-green: #A5D6A7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* 导航 */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-white);
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.15);
+            z-index: 1000;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--text-gray);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: var(--bg-light);
+            color: var(--primary-green);
+        }
+        
+        /* 幻灯片容器 */
+        .slides-container {
+            padding-top: 60px;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .slide:nth-child(even) {
+            background: var(--bg-white);
+        }
+        
+        /* 封面 */
+        .cover {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #1B5E20 100%);
+            color: var(--bg-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        
+        .cover-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .cover h1 {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-subtitle {
+            font-size: 22px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-stat {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 24px 36px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .cover-stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #C8E6C9;
+        }
+        
+        .cover-stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        /* 内容页通用 */
+        .slide-header {
+            margin-bottom: 40px;
+        }
+        
+        .slide-tag {
+            display: inline-block;
+            background: var(--primary-green);
+            color: var(--bg-white);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .slide h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .slide-summary {
+            font-size: 17px;
+            color: var(--text-gray);
+        }
+        
+        /* 卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08);
+            border-left: 4px solid var(--light-green);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15);
+        }
+        
+        .card-accent {
+            border-left-color: var(--accent-green);
+        }
+        
+        .card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card p, .card li {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.9;
+        }
+        
+        .card ul {
+            padding-left: 18px;
+        }
+        
+        .card li {
+            margin-bottom: 8px;
+        }
+        
+        /* 数据展示 */
+        .data-row {
+            display: flex;
+            gap: 24px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .data-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08);
+            border: 1px solid var(--border-green);
+        }
+        
+        .data-box-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .data-box-label {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-top: 8px;
+        }
+        
+        /* 表格 */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-white);
+        }
+        
+        th {
+            background: var(--primary-green);
+            color: var(--bg-white);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-green);
+            font-size: 14px;
+        }
+        
+        tr:hover {
+            background: var(--bg-light);
+        }
+        
+        tr.highlight {
+            background: #E8F5E9;
+        }
+        
+        /* 双引擎框架图 */
+        .engine-framework {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .engine-box {
+            flex: 1;
+            min-width: 300px;
+            max-width: 420px;
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.12);
+        }
+        
+        .engine-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .engine-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .engine-left .engine-icon {
+            background: #E8F5E9;
+        }
+        
+        .engine-right .engine-icon {
+            background: #F1F8E9;
+        }
+        
+        .engine-left h3 {
+            color: var(--primary-green);
+        }
+        
+        .engine-right h3 {
+            color: var(--light-green);
+        }
+        
+        .engine-arrow {
+            font-size: 36px;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+        
+        /* 执行清单 */
+        .checklist {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 28px;
+            margin-top: 24px;
+            box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08);
+        }
+        
+        .checklist h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-green);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #E8F5E9;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-check {
+            width: 22px;
+            height: 22px;
+            background: var(--light-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .checklist-content {
+            flex: 1;
+        }
+        
+        .checklist-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .checklist-desc {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+        
+        /* 时间线 */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            position: relative;
+            gap: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .timeline-dot {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-white);
+            border: 4px solid var(--primary-green);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary-green);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-item.active .timeline-dot {
+            background: var(--primary-green);
+            color: var(--bg-white);
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        /* 飞轮图 */
+        .flywheel {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .flywheel-circle {
+            width: 380px;
+            height: 380px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .flywheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-white);
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
+        }
+        
+        .flywheel-item {
+            position: absolute;
+            width: 130px;
+            padding: 14px;
+            background: var(--bg-white);
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(46, 125, 50, 0.12);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            border: 2px solid var(--border-green);
+        }
+        
+        .flywheel-item:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); }
+        .flywheel-item:nth-child(3) { top: 22%; right: -10px; }
+        .flywheel-item:nth-child(4) { bottom: 22%; right: -10px; }
+        .flywheel-item:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .flywheel-item:nth-child(6) { bottom: 22%; left: -10px; }
+        .flywheel-item:nth-child(7) { top: 22%; left: -10px; }
+        
+        /* 底部行动 */
+        .action-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #1B5E20 100%);
+            color: var(--bg-white);
+        }
+        
+        .action-section h2 {
+            color: var(--bg-white);
+        }
+        
+        .action-section .slide-summary {
+            color: rgba(255,255,255,0.85);
+        }
+        
+        .action-cards {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .action-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 32px;
+            width: 320px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .action-card-number {
+            font-size: 44px;
+            font-weight: 700;
+            color: #C8E6C9;
+            margin-bottom: 16px;
+        }
+        
+        .action-card h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--bg-white);
+        }
+        
+        .action-card p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        /* 话术卡片 */
+        .quote-card {
+            background: #E8F5E9;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            border-left: 4px solid var(--light-green);
+        }
+        
+        .quote-card p {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+        
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary-green);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .tag-highlight {
+            background: var(--light-green);
+            color: var(--bg-white);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .cover h1 { font-size: 28px; }
+            .cover-stats { flex-direction: column; gap: 20px; }
+            .cover-stat { padding: 20px 30px; }
+            .data-row { flex-direction: column; }
+            .engine-framework { flex-direction: column; }
+            .engine-arrow { transform: rotate(90deg); }
+            .flywheel-circle { width: 300px; height: 300px; }
+            .flywheel-item { width: 100px; font-size: 11px; padding: 10px; }
+            .timeline { flex-direction: column; gap: 30px; }
+            .timeline::before { display: none; }
+            .action-cards { flex-direction: column; align-items: center; }
+            .slide { padding: 40px 20px; }
+        }
+        
+        /* 滚动动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+        
+        .highlight-orange {
+            color: #F57C00;
+            font-weight: 600;
+        }
+    
+        /* 排版优化 */
+        .checklist { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(46,125,50,0.06); margin-top: 24px; }
+        .checklist h4 { font-size: 18px; color: var(--primary-dark); margin-bottom: 20px; font-weight: 700; }
+        .checklist-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(46,125,50,0.08); }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-check { flex-shrink: 0; width: 28px; height: 28px; background: linear-gradient(135deg, #2E7D32, #43A047); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; margin-top: 2px; }
+        .checklist-title { font-size: 15.5px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+        .checklist-desc { font-size: 14px; color: var(--text-gray); line-height: 1.8; }
+        
+        .card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,125,50,0.1); }
+        .card h3 { font-size: 17px; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
+        .card p, .card li { font-size: 14px; line-height: 1.75; color: var(--text-gray); }
+        .card ul { padding-left: 0; list-style: none; }
+        .card ul li { padding: 6px 0; padding-left: 18px; position: relative; }
+        .card ul li::before { content: "•"; color: var(--primary-green); position: absolute; left: 0; font-weight: bold; }
+        
+        .data-box { text-align: center; padding: 24px 16px; }
+        .data-box-number { font-size: 36px; font-weight: 800; color: var(--primary-green); letter-spacing: -1px; }
+        .data-box-label { font-size: 13px; color: var(--text-gray); margin-top: 6px; font-weight: 500; }
+        
+        table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        thead th { background: linear-gradient(135deg, #2E7D32, #388E3C); color: white; padding: 14px 12px; font-size: 14px; font-weight: 600; }
+        tbody td { padding: 13px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
+        tbody tr:hover { background: #F1F8E9; }
+        tbody tr.highlight { background: #E8F5E9; font-weight: 600; }
+        
+        .timeline-item { flex: 1; position: relative; padding: 0 12px; }
+        .timeline-dot { width: 56px; height: 56px; background: linear-gradient(135deg, #2E7D32, #43A047); color: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; margin: 0 auto 12px; box-shadow: 0 4px 12px rgba(46,125,50,0.25); }
+        .timeline-title { font-size: 16px; font-weight: 700; color: var(--text-dark); text-align: center; margin-bottom: 6px; }
+        .timeline-desc { font-size: 13px; color: var(--text-gray); text-align: center; line-height: 1.7; }
+
+        .flywheel-circle { animation: slowSpin 30s linear infinite; }
+
+    
+        /* ===== Apple-style Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.15); }
+            50% { box-shadow: 0 0 30px 10px rgba(46,125,50,0.08); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .fade-in { opacity: 0; }
+        .fade-in.visible {
+            animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .cover { 
+            animation: fadeInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        .cover-stat {
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .cover-stat:nth-child(1) { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+        .cover-stat:nth-child(2) { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+        .cover-stat:nth-child(3) { animation-delay: 0.6s; opacity: 0; animation-fill-mode: forwards; }
+        .cover-stat-number {
+            background: linear-gradient(135deg, #fff 0%, #E8F5E9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide-header { animation: fadeInUp 0.7s ease-out; }
+        .slide-tag {
+            background: linear-gradient(135deg, #2E7D32, #43A047, #66BB6A);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .data-box {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .data-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(46,125,50,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .data-box:hover::after { opacity: 1; }
+        .data-box:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 32px rgba(46,125,50,0.12);
+        }
+        .data-box-number {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .data-box:hover .data-box-number {
+            transform: scale(1.1);
+        }
+
+        .checklist-item {
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+        .checklist-item:nth-child(1) { animation-delay: 0.1s; }
+        .checklist-item:nth-child(2) { animation-delay: 0.2s; }
+        .checklist-item:nth-child(3) { animation-delay: 0.3s; }
+        .checklist-item:nth-child(4) { animation-delay: 0.4s; }
+        .checklist-item:hover {
+            background: rgba(232,245,233,0.4);
+            padding-left: 24px;
+            border-radius: 10px;
+        }
+        .checklist-check {
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+            box-shadow: 0 4px 12px rgba(46,125,50,0.25);
+        }
+
+        .card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        .card-grid .card:nth-child(1) { animation-delay: 0.1s; }
+        .card-grid .card:nth-child(2) { animation-delay: 0.2s; }
+        .card-grid .card:nth-child(3) { animation-delay: 0.3s; }
+        .card-grid .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(46,125,50,0.12), 0 0 0 1px rgba(46,125,50,0.06);
+        }
+
+        table {
+            animation: scaleIn 0.6s ease-out;
+        }
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+        tbody tr:hover td {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .timeline-item {
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+        .timeline-item:nth-child(1) { animation-delay: 0.15s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.45s; }
+        .timeline-dot {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .timeline-dot:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.35);
+        }
+
+        .flywheel {
+            animation: fadeInUp 0.7s ease-out;
+        }
+        .flywheel-circle {
+            transition: all 0.5s ease;
+        }
+        .flywheel:hover .flywheel-circle {
+            animation-play-state: paused;
+            filter: drop-shadow(0 8px 24px rgba(46,125,50,0.2));
+        }
+        .flywheel-item {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .flywheel-item:hover {
+            background: white;
+            color: var(--primary-green);
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.15);
+            font-weight: 700;
+        }
+        .flywheel-center {
+            background: linear-gradient(135deg, #2E7D32, #43A047, #66BB6A);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite, pulse-glow 3s ease-in-out infinite;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            transition: all 0.3s;
+        }
+        .tag-highlight {
+            background: linear-gradient(135deg, rgba(46,125,50,0.1), rgba(102,187,106,0.15));
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            border-left: 3px solid var(--primary-green);
+            transition: all 0.3s;
+        }
+
+        .quote-card {
+            animation: slideInLeft 0.5s ease-out;
+            transition: all 0.3s;
+        }
+        .quote-card:hover {
+            transform: translateX(6px);
+            border-left-width: 4px;
+        }
+
+        /* Nav smooth */
+        .nav-item {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            color: white;
+            transform: scaleX(1.02);
+            box-shadow: 0 4px 12px rgba(46,125,50,0.25);
+        }
+        .nav-item:hover:not(.active) {
+            background: rgba(46,125,50,0.08);
+            transform: translateX(3px);
+        }
+
+        /* Scrollbar美化 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary-green), var(--light-green)); border-radius: 3px; }
+
+        /* Selection */
+        ::selection { background: rgba(46,125,50,0.2); color: var(--primary-dark); }
+
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <nav class="nav">
+        <div class="nav-logo">🌿 苗医生2026增长方案</div>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="scrollToSlide(0)">封面</div>
+            <div class="nav-item" onclick="scrollToSlide(1)">现状诊断</div>
+            <div class="nav-item" onclick="scrollToSlide(2)">双引擎战略</div>
+            <div class="nav-item" onclick="scrollToSlide(3)">本地生活</div>
+            <div class="nav-item" onclick="scrollToSlide(4)">招商升级</div>
+            <div class="nav-item" onclick="scrollToSlide(5)">协同效应</div>
+            <div class="nav-item" onclick="scrollToSlide(6)">合作方案</div>
+            <div class="nav-item" onclick="scrollToSlide(6)">合作方案</div>
+        </div>
+    </nav>
+
+    <div class="slides-container">
+        <!-- 封面 -->
+        <section class="cover slide" id="slide-0">
+            <div class="cover-badge">苗医生 X 派特猫</div>
+            <h1>本地生活深度经营 × 招商模式升级</h1>
+            <p class="cover-subtitle">流量翻倍增长 · 千店裂变扩张</p>
+            <div class="cover-stats">
+                <div class="cover-stat">
+                    <div class="cover-stat-number">3万单</div>
+                    <div class="cover-stat-label">流量增长目标</div>
+                </div>
+                <div class="cover-stat">
+                    <div class="cover-stat-number">小而美</div>
+                    <div class="cover-stat-label">招商模式升级方向</div>
+                </div>
+                <div class="cover-stat">
+                    <div class="cover-stat-number">千店</div>
+                    <div class="cover-stat-label">裂变扩张目标</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 现状诊断 -->
+        <section class="slide" id="slide-1">
+            <div class="slide-header">
+                <span class="slide-tag">第一部分</span>
+                <h2>现状诊断：双重困境</h2>
+                <p class="slide-summary">流量端过度依赖投流，招商端大店模式难以下沉</p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🔴 流量端困境</h3>
+                    <ul>
+                        <li>获客成本高达 <span class="highlight">120元/个</span></li>
+                        <li>月均仅 <span class="highlight">5000单</span>，增长停滞</li>
+                        <li>达人/自播渠道 <span class="highlight">完全空白</span></li>
+                        <li>三四线城市流量 <span class="highlight">表现极差</span></li>
+                    </ul>
+                </div>
+                <div class="card card-accent">
+                    <h3>🔴 招商端困境</h3>
+                    <ul>
+                        <li>大店投资 <span class="highlight">25-35万</span>，门槛过高</li>
+                        <li>回本周期 <span class="highlight">12-18个月</span></li>
+                        <li>人员配置重（1老板+2-3技师）</li>
+                        <li>下沉市场 <span class="highlight">难以复制</span></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>💡 核心洞察</h3>
+                    <p>大店适合做<strong>品牌形象</strong>，但不适合做<strong>规模扩张</strong>。用大店打下沉市场，就像用坦克打巷战。</p>
+                    <div style="margin-top: 16px;">
+                        <span class="tag">需要轻量模型</span>
+                        <span class="tag">需要体系化运营</span>
+                        <span class="tag">需要代理商支持</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-row" style="margin-top: 40px;">
+                <div class="data-box">
+                    <div class="data-box-number">80%+</div>
+                    <div class="data-box-label">流量依赖广告投流</div>
+                </div>
+                <div class="data-box">
+                    <div class="data-box-number">0</div>
+                    <div class="data-box-label">达人矩阵体系</div>
+                </div>
+                <div class="data-box">
+                    <div class="data-box-number">100-150㎡</div>
+                    <div class="data-box-label">标准店面积</div>
+                </div>
+                <div class="data-box">
+                    <div class="data-box-number">200-300万</div>
+                    <div class="data-box-label">单店年产值</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 双引擎战略 -->
+        <section class="slide" id="slide-2">
+            <div class="slide-header">
+                <span class="slide-tag">第二部分</span>
+                <h2>双引擎驱动战略</h2>
+                <p class="slide-summary">本地生活经营解决流量问题，小而美招商解决扩张问题</p>
+            </div>
+
+            <div class="engine-framework">
+                <div class="engine-box engine-left">
+                    <h3><span class="engine-icon">🚀</span> 引擎一：本地生活深度经营</h3>
+                    <ul style="margin-top: 16px; padding-left: 20px; line-height: 2.2;">
+                        <li><strong>达人矩阵</strong>：分层运营，铺量种草</li>
+                        <li><strong>商家自播</strong>：门店直播，持续转化</li>
+                        <li><strong>社群运营</strong>：激活老客，裂变新客</li>
+                        <li><strong>团单优化</strong>：阶梯设计，提升效率</li>
+                    </ul>
+                    <div style="margin-top: 24px; padding: 16px; background: #E8F5E9; border-radius: 8px; font-size: 14px;">
+                        <strong>目标：</strong>流量翻倍增长，成本显著降低
+                    </div>
+                </div>
+                
+                <div class="engine-arrow">⇄</div>
+                
+                <div class="engine-box engine-right">
+                    <h3><span class="engine-icon">🏪</span> 引擎二：小而美招商升级</h3>
+                    <ul style="margin-top: 16px; padding-left: 20px; line-height: 2.2;">
+                        <li><strong>标准店</strong>（100-150㎡）：做品牌形象</li>
+                        <li><strong>轻量店</strong>（40-60㎡）：做规模扩张</li>
+                        <li><strong>迷你站</strong>（20-30㎡）：做市场渗透</li>
+                        <li><strong>裂变模式</strong>：老带新+客户转代理</li>
+                        <li><strong>取消卖地图</strong>：转向新实体定位</li>
+                        <li><strong>服务商招商</strong>：把市场交给市场</li>
+                        <li><strong>分润波比加大</strong>：让卖的人赚得多</li>
+                    </ul>
+                    <div style="margin-top: 24px; padding: 16px; background: #F1F8E9; border-radius: 8px; font-size: 14px;">
+                        <strong>目标：</strong>年度新增100+门店
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 24px; background: var(--bg-white); border-radius: 12px; box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08);">
+                <p style="font-size: 17px; color: var(--text-gray);">
+                    <strong style="color: var(--primary-green);">核心协同：</strong>
+                    新开的"小而美"门店成为本地生活流量的最佳承接终端 → 流量增长反哺招商扩张 → 形成<strong style="color: var(--light-green);">正向飞轮</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- 引擎一：本地生活深度经营 -->
+        <section class="slide" id="slide-3">
+            <div class="slide-header">
+                <span class="slide-tag">引擎一</span>
+                <h2>本地生活深度经营落地执行</h2>
+                <p class="slide-summary">从"单一投流"进化为"四渠协同"，建立持续的线上资产</p>
+            </div>
+
+            <!-- 达人矩阵策略 -->
+            <div class="checklist">
+                <h4>📹 达人矩阵策略（具体到执行动作）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">达人分层配比：7:2:1</div>
+                        <div class="checklist-desc">
+                            <span class="tag">头部10%</span>品牌引爆，月均2-3人，负责大促节点
+                            <span class="tag">中腰部20%</span>持续种草，每城5-10人
+                            <span class="tag">素人KOC 70%</span>真实口碑，单价低、数量大、信任度高
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">招募渠道（四管齐下）</div>
+                        <div class="checklist-desc">
+                            ① 抖音星图官方平台 ② 本地MCN机构合作 ③ 员工/客户转介绍（成功奖励500元/人）
+                            ④ 竞品达人挖角（提供更高佣金+长期合作）
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">内容四大类型（每月配比）</div>
+                        <div class="checklist-desc">
+                            <span class="tag">探店vlog 40%</span>沉浸式体验，建立信任
+                            <span class="tag">前后对比 30%</span>视觉冲击，直接转化
+                            <span class="tag">科普干货 20%</span>知识输出，树立专业
+                            <span class="tag">团购测评 10%</span>直接带货，挂载链接
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">执行SOP（全流程标准化）</div>
+                        <div class="checklist-desc">
+                            <strong>筛选标准：</strong>粉丝画像匹配度>60%，近30天发布频率>5条，互动率>3%
+                            → <strong>试拍机制：</strong>先拍1条测试，ROI>1:3再放量
+                            → <strong>放量标准：</strong>月合作5-10条，根据数据动态调整
+                            → <strong>结算流程：</strong>发布后7天结算基础费用，30天后根据核销结算提成
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">三四线城市专项策略</div>
+                        <div class="checklist-desc">
+                            重点招募<span class="tag-highlight">本地素人KOC（粉丝1000-5000）</span>，性价比最高；
+                            内容加入<span class="tag-highlight">方言元素</span>和<span class="tag-highlight">地域话题</span>；
+                            探店场景选在本地人熟悉的商圈/街道；
+                            团单价格带下移：设计39-79元区间引流品
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 门店积极性调动策略 -->
+            <div class="checklist" style="margin-top: 24px;">
+                <h4>📱 门店积极性调动方法论（门店不配合拍短视频怎么办？）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">痛点拆解：门店为什么不愿意做？</div>
+                        <div class="checklist-desc">
+                            ① <strong>不会拍</strong>——没有内容能力，不知道拍什么<br>
+                            ② <strong>没时间</strong>——门店本身忙，拍视频是额外负担<br>
+                            ③ <strong>看不到回报</strong>——拍了没效果，不如不做<br>
+                            ④ <strong>怕出镜</strong>——老板/技师不好意思面对镜头<br>
+                            <strong>核心结论：不要指望门店主动做，要设计一套"低门槛+高回报+强督导"的机制</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">方法一：总部赋能，降低门槛到"零"</div>
+                        <div class="checklist-desc">
+                            <span class="tag-highlight">脚本模板化</span>派特猫提供10套短视频脚本模板（客户故事型/知识科普型/反差对比型/日常记录型/团单促销型等），门店只需填空+照读<br>
+                            <span class="tag-highlight">素材包配送</span>每周下发1个拍摄素材包（文案+配乐+字幕模板），门店用剪映一键套用<br>
+                            <span class="tag-highlight">远程代剪辑</span>门店只负责拍原始素材（5-10分钟），派特猫远程剪辑成片（24小时交付），门店只需发布
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                            <span class="tag">纯产品展示型</span>只拍产品+仪器+环境，不出人，用画外音+字幕讲解<br>
+                            <span class="tag">客户证言型</span>征得客户同意，拍摄客户使用后的反馈（客户比员工更有说服力）<br>
+                            <span class="tag">AI数字人</span>派特猫提供AI数字人模板，门店输入文案即可生成口播视频，完全无需真人出镜
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">方法四：督导机制，让执行有"牙齿"</div>
+                        <div class="checklist-desc">
+                            <span class="tag-highlight">周报制度</span>每周一上午10点前，门店提交上周视频发布截图+数据到工作群<br>
+                            <span class="tag-highlight">巡检打分</span>督导月度巡检时，短视频/直播执行情况纳入考核（占比20%），与季度返利挂钩<br>
+                            <span class="tag-highlight">红黑榜</span>每月发布执行红黑榜，红榜门店获得额外资源倾斜，连续2个月黑榜约谈整改
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 流量推广组合策略 -->
+            <div class="checklist" style="margin-top: 24px;">
+                <h4>🔥 流量推广组合策略（看得见的增长，反常识打法）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">会销型大场直播（一场顶30天）</div>
+                        <div class="checklist-desc">
+                            <strong>反常识：</strong>不要每场直播都卖货，一个月做1场"大场"就够了<br>
+                            <span class="tag-highlight">策划逻辑</span>预热期7天（达人集中种草+社群倒计时+朋友圈剧透）→ 直播当天3小时大场（限时秒杀+抽奖+连线客户）→ 48小时长尾（回放挂载+二次传播）<br>
+                            <span class="tag-highlight">关键动作</span>派特猫操盘手+品牌创始人双播，仪式感拉满；直播间做成"祛痘节"的即视感<br>
+                            <strong>一场大场直播的目标：GMV占整月30%+</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">爆款团单测试推流（用数据验证，不靠拍脑袋）</div>
+                        <div class="checklist-desc">
+                            <strong>反常识：</strong>不要一上来就全量推广，先花2000块测团单<br>
+                            <span class="tag-highlight">测试流程</span>设计3款不同价格/不同组合的团单 → 每款投放500-800元DOU+ → 跑3天看数据 → 选出点击率+转化率最高的1款 → 集中预算放量<br>
+                            <span class="tag-highlight">爆款标准</span>点击率>5%，转化率>8%，核销率>60%<br>
+                            <strong>核心逻辑：小成本试错，大预算追赢</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">自造节营销（让用户有理由"现在就买"）</div>
+                        <div class="checklist-desc">
+                            <strong>反常识：</strong>不要等平台造节，自己造节，品牌说了算<br>
+                            <span class="tag-highlight">月度节奏</span><br>
+                            ① <strong>每月18日"清痘日"</strong>（1.8元秒杀面诊+限量特惠套餐+社群专属福利）<br>
+                            ② <strong>每季度"焕肤节"</strong>（大场直播+达人矩阵集中爆发+新品发布）<br>
+                            ③ <strong>年度"苗医生祛痘文化节"</strong>（品牌大事件+媒体PR+全网热搜）<br>
+                            <strong>核心逻辑：给消费者一个"今天必须买"的理由，而不是"以后再说"</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">达人内容反常识脚本策略（黄金3秒定生死）</div>
+                        <div class="checklist-desc">
+                            <strong>反常识：</strong>不要拍"正常"的祛痘视频，要在前3秒制造"不可能的注意力"<br>
+                            <span class="tag-highlight">钩子策略1：视觉冲击型</span>开头放黑人模特的皮肤特写（极致肤质对比，3秒停住滑动的手）→ 切到"原来中国人也可以这样做祛痘" → 自然过渡到产品/服务<br>
+                            <span class="tag-highlight">钩子策略2：反直觉型</span>"千万别去祛痘店"→ 3秒后反转"除非你懂这3个避坑方法"<br>
+                            <span class="tag-highlight">钩子策略3：制造争议型</span>"祛痘行业最大的谎言是..." → 引发评论区讨论 → 算法推流<br>
+                            <span class="tag-highlight">钩子策略4：素人真实型</span>开头直接上"烂脸"特写（征得客户同意）→ "这是第1天" → "这是第30天" → 完播率极高<br>
+                            <strong>核心公式：黄金3秒钩子 + 中段价值输出 + 尾段行动指令（点链接/领福利）</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">流量增长可视化闭环</div>
+                        <div class="checklist-desc">
+                            <span class="tag">第1步</span>爆款团单测试确定"流量弹药"
+                            <span class="tag">第2步</span>反常识脚本+达人矩阵形成"内容火力网"
+                            <span class="tag">第3步</span>门店短视频+社群承接"流量落地"
+                            <span class="tag">第4步</span>大场直播+自造节实现"GMV爆发"
+                            <span class="tag">第5步</span>数据复盘→优化→下一轮更快更强<br>
+                            <strong>客户看到的是：每周都有新动作，每月都有增长曲线，每季度都有大事件</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社群运营策略 -->
+            <div class="checklist" style="margin-top: 24px;">
+                <h4>💬 门店社群运营策略（激活老客户，裂变新客户）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">社群定位与分层</div>
+                        <div class="checklist-desc">
+                            <strong>不是广告群，而是"痘友互助+专业答疑"群</strong><br>
+                            <span class="tag">新客群</span>7天转化群（新客入群→每日跟进→7天内到店）
+                            <span class="tag">老客群</span>复购+转介绍群（已消费客户，重点维护）
+                            <span class="tag">VIP群</span>高价值客户专属（消费满3000元，享受专属福利）
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">日常运营内容（每日节奏）</div>
+                        <div class="checklist-desc">
+                            <strong>早安（8:00）：</strong>护肤小贴士+今日天气提醒<br>
+                            <strong>午间（12:00）：</strong>案例分享（前后对比图，征得客户同意）<br>
+                            <strong>晚间（20:00）：</strong>答疑时间（店长/技师在线解答）<br>
+                            <strong>不定期：</strong>直播预告、限时福利、新品体验
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">活跃度调动机制</div>
+                        <div class="checklist-desc">
+                            <span class="tag-highlight">打卡机制</span>连续打卡7天送小样（价值30元）
+                            <span class="tag-highlight">问答奖励</span>群内提问被选中直播解答，送免费项目（价值99元）
+                            <span class="tag-highlight">晒单激励</span>治疗前后对比晒单，送50元优惠券
+                            <span class="tag-highlight">转介绍奖励</span>老客介绍新客成功到店，双方各得100元项目抵扣券
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">工具支持</div>
+                        <div class="checklist-desc">
+                            企业微信SCRM系统（自动欢迎语、标签化管理、群发助手）
+                            每周社群运营数据报表（活跃度、转化率、转介绍数）
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 实施路线图 -->
+            <div class="timeline" style="margin-top: 40px;">
+                <div class="timeline-item active">
+                    <div class="timeline-dot">6月</div>
+                    <div class="timeline-title">基建期</div>
+                    <div class="timeline-desc">达人库搭建（首批30-50人）<br>5-10家门店直播试点<br>新团单阶梯上线</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">7月</div>
+                    <div class="timeline-title">放量期</div>
+                    <div class="timeline-desc">达人扩展至100+<br>自播推广至50家门店<br>社群运营体系跑通</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">8月</div>
+                    <div class="timeline-title">优化期</div>
+                    <div class="timeline-desc">数据驱动优化<br>下沉市场复制<br>冲刺流量翻倍</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 引擎二：招商升级 -->
+        <section class="slide" id="slide-4">
+            <div class="slide-header">
+                <span class="slide-tag">引擎二</span>
+                <h2>小而美招商升级落地执行</h2>
+                <p class="slide-summary">三阶门店模型+裂变模式+代理商平稳过渡+招商底层逻辑重构</p>
+            </div>
+
+            <!-- 招商底层逻辑重构 -->
+            <div class="checklist" style="margin-top: 30px;">
+                <h4>🧠 招商底层逻辑重构（从卖地图到建生态）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">取消"卖地图"思维，转向"新实体"定位</div>
+                        <div class="checklist-desc">
+                            <strong>旧逻辑：</strong>品牌方划区域→卖代理权→收加盟金→结束<br>
+                            <strong>新逻辑：</strong>品牌方提供<strong>"流量+供应链+运营SOP"三位一体</strong>的新实体解决方案<br>
+                            <span class="tag-highlight">本质变化</span>品牌不再是"卖资格"的甲方，而是"帮人开店"的服务方<br>
+                            <span class="tag-highlight">客户视角</span>"我不是买了个代理权，我是加盟了一套赚钱系统"<br>
+                            <strong>核心：从一次性交易变成长期共赢关系</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">把招商交给服务商，把市场交给市场</div>
+                        <div class="checklist-desc">
+                            <strong>旧模式：</strong>品牌方自己做招商→人效低、成本高、速度慢<br>
+                            <strong>新模式：</strong>服务商即招商官，服务商在自己的地盘做招商，自带信任+资源<br>
+                            <span class="tag-highlight">服务商角色升级</span>从"进货卖货"升级为"区域运营合伙人"<br>
+                            <span class="tag-highlight">品牌方退居幕后</span>提供品牌背书+流量赋能+培训体系+供应链保障<br>
+                            <span class="tag-highlight">市场逻辑</span>让最懂本地市场的人做本地市场的招商，市场会自己选择最优解<br>
+                            <strong>核心：品牌做标准，服务商做增量，市场做筛选</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">增大分润波比，让"卖的人比做的人赚得多"</div>
+                        <div class="checklist-desc">
+                            <strong>旧逻辑：</strong>品牌方吃大头，服务商/加盟商喝汤<br>
+                            <strong>新逻辑：</strong>倒置分润结构——前端给够，后端靠规模<br>
+                            <span class="tag-highlight">招商分润</span>推荐开店的服务商获得远超行业平均的招商分成，让"拉人入局"这件事本身就有强动力<br>
+                            <span class="tag-highlight">运营分润</span>服务商从区域内所有门店的GMV中抽成，区域越繁荣收益越高<br>
+                            <span class="tag-highlight">裂变分润</span>服务商推荐的服务商再推荐新店，上游仍享受微量分红（限2级，合规）<br>
+                            <strong>核心：把利润分给离市场最近的人，让他们比品牌方更有动力去扩张</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">从"管"到"赋能"：派特猫角色转型</div>
+                        <div class="checklist-desc">
+                            <span class="tag">旧总部</span>审批者、管控者、收钱者
+                            <span class="tag-highlight">新总部</span>赋能者、服务者、增长引擎<br>
+                            具体动作：总部帮门店做流量、帮服务商做培训、帮体系做品牌——<br>
+                            <strong>品牌方赚的是"规模的钱"而不是"单店的钱"</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 三阶门店模型 -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>标准店（现有）</th>
+                            <th>轻量店（主推）</th>
+                            <th>迷你站（探索）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>面积</strong></td>
+                            <td>100-150㎡</td>
+                            <td>40-60㎡</td>
+                            <td>20-30㎡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>投资</strong></td>
+                            <td>25-35万</td>
+                            <td>10-15万</td>
+                            <td>5-8万</td>
+                        </tr>
+                        <tr>
+                            <td><strong>加盟金</strong></td>
+                            <td>3.98万</td>
+                            <td>1.98万</td>
+                            <td>0.98万</td>
+                        </tr>
+                        <tr>
+                            <td><strong>人员</strong></td>
+                            <td>1老板+2-3技师</td>
+                            <td>1老板+1技师</td>
+                            <td>1人</td>
+                        </tr>
+                        <tr>
+                            <td><strong>年产值</strong></td>
+                            <td>200-300万</td>
+                            <td>80-120万</td>
+                            <td>30-50万</td>
+                        </tr>
+                        <tr>
+                            <td><strong>回本周期</strong></td>
+                            <td>12-18月</td>
+                            <td>6-9月</td>
+                            <td>4-6月</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td><strong>适用市场</strong></td>
+                            <td>一二线核心商圈</td>
+                            <td>三四线/社区（主力）</td>
+                            <td>商场专柜/县城</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 裂变模式 -->
+            <div class="checklist" style="margin-top: 30px;">
+                <h4>🚀 裂变模式设计（让增长自我驱动）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">老代理商带新代理商</div>
+                        <div class="checklist-desc">
+                            ① 推荐新代理商成功开店，奖励<span class="highlight">5000-8000元/店</span><br>
+                            ② 被推荐的新店首年进货额的<span class="highlight">2%</span>返给推荐人（持续一年）<br>
+                            ③ 推荐满5家解锁<span class="tag-highlight">"区域合伙人"</span>身份，享受区域内所有新店进货额1%分红
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">客户转代理（零门槛创业）</div>
+                        <div class="checklist-desc">
+                            老客户（治疗满3个月且效果满意）可申请成为<span class="tag-highlight">"社区合伙人"</span><br>
+                            不开店，只做转介绍，成交一家店奖励<span class="highlight">3000元</span><br>
+                            适用：宝妈、兼职人群、有本地人脉资源的人
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">裂变工具支持</div>
+                        <div class="checklist-desc">
+                            专属推荐码系统、实时追踪看板、自动结算系统、推荐人专属后台
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代理商平稳过渡 -->
+            <div class="checklist" style="margin-top: 24px;">
+                <h4>🛡️ 代理商平稳过渡方案（关键！确保接受度）</h4>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">存量保护（让老代理安心）</div>
+                        <div class="checklist-desc">
+                            现有代理商的<span class="highlight">授权区域、进货折扣、返利政策保持不变</span><br>
+                            新开的轻量店/迷你站若在其区域内，<span class="highlight">仍计入其服务业绩</span>，享受原有分润
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">增量激励（让老代理积极参与）</div>
+                        <div class="checklist-desc">
+                            鼓励现有代理商转型开轻量店：首店额外补贴<span class="highlight">1万元装修费</span><br>
+                            开轻量店数量达标（≥3家），解锁<span class="highlight">额外区域授权</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">培训支持（降低转型门槛）</div>
+                        <div class="checklist-desc">
+                            免费参加<span class="tag-highlight">"小店运营特训营"</span>（直播运营+社群运营+轻量店管理）<br>
+                            优先获得派特猫派出的运营督导支持
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-content">
+                        <div class="checklist-title">沟通话术（给招商团队用）</div>
+                        <div class="checklist-desc">
+                            <div class="quote-card">
+                                <p>"不是取代您，是给您更多工具。小店模型让您用更低的成本测试新市场，您的大店做品牌，小店帮您铺密度，两者互补。"</p>
+                            </div>
+                            <div class="quote-card">
+                                <p>"您区域内的轻量店，业绩还是算您的，您相当于多了帮手，不用自己投钱开店，却能享受更多分润。"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 落地保障 -->
+            <div class="card-grid" style="margin-top: 30px;">
+                <div class="card">
+                    <h3></h3>
+                    <p>人口密度、竞品密度、交通便利性、租金合理性、社区成熟度五项指标，满分100分，80分以上方可开店</p>
+                </div>
+                <div class="card">
+                    <h3></h3>
+                    <p></p>
+                </div>
+                <div class="card">
+                    <h3></h3>
+                    <p></p>
+                </div>
+                <div class="card card-accent">
+                    <h3></h3>
+                    <p>第1周预热（地推+社群）→ 第2周爆发（开业特惠+首直播）→ 第3-4周稳定（常态化运营）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 协同效应 -->
+        <section class="slide" id="slide-5">
+            <div class="slide-header">
+                <span class="slide-tag">协同效应</span>
+                <h2>双引擎飞轮效应</h2>
+                <p class="slide-summary">两大引擎不是平行关系，而是相互加速的正向飞轮</p>
+            </div>
+
+            <div class="flywheel">
+                <div class="flywheel-circle">
+                    <div class="flywheel-center">正向<br>飞轮</div>
+                    <div class="flywheel-item">门店数量<br>↑</div>
+                    <div class="flywheel-item">直播阵地<br>↑</div>
+                    <div class="flywheel-item">内容分发<br>↑</div>
+                    <div class="flywheel-item">流量增长<br>↑</div>
+                    <div class="flywheel-item">GMV提升<br>↑</div>
+                    <div class="flywheel-item">招商吸引力<br>↑</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0; padding: 20px; background: var(--bg-white); border-radius: 12px;">
+                <p style="font-size: 16px; color: var(--text-gray);">
+                    流量引擎为招商引擎提供<span class="highlight">数据和案例支撑</span>（"你看我们帮XX店做到了月销XXX单"）<br>
+                    招商引擎为流量引擎提供<span class="highlight">更多承接终端</span>（店越多，直播阵地越多，达人探店标的越多）
+                </p>
+            </div>
+
+            
+            </div>
+        </section>
+
+        <!-- 合作方案 -->
+        <section class="slide" id="slide-6">
+            <div class="slide-header">
+                <span class="slide-tag">合作方案</span>
+                <h2>服务模式与报价</h2>
+                <p class="slide-summary">根据品牌发展阶段灵活选择</p>
+            </div>
+
+
+            <div style="margin: 24px 0; padding: 20px; background: #E8F5E9; border-radius: 12px; border-left: 4px solid var(--primary-green);">
+                <h4 style="margin: 0 0 12px 0; color: var(--primary-green);">📋 
+            </div>
+
+            <div class="card-grid" style="margin-top: 20px;">
+                <div class="card" style="border-left: 4px solid var(--primary-green);">
+                    <h3>📦 季度服务包 · 60万/季度</h3>
+                    <p style="margin-bottom: 16px;"><strong>适用：</strong>验证模式，跑通单城试点</p>
+                    <ul>
+                        <li><strong>模块一：</strong>品牌定位与赛道破局</li>
+                        <li><strong>模块二：</strong>门店流量引擎</li>
+                        <li><strong>模块三：</strong>货盘结构与爆品策略</li>
+                        <li><strong>模块四：</strong>内容工厂与达人矩阵</li>
+                        <li><strong>模块五：</strong>大场直播与事件营销</li>
+                        <li><strong>模块六：</strong>门店运营与数据复盘</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 16px; background: #E8F5E9; border-radius: 8px; font-size: 14px;">
+                        <strong>核心交付：</strong>一个季度跑通本地生活全链路，数据可追踪、模型可复制
+                    </div>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid var(--light-green); position: relative;">
+                    <h3>🚀 年度服务包 · 168万/年</h3>
+                    <p style="margin-bottom: 16px;"><strong>适用：</strong>全量铺开，双引擎同步推进</p>
+                    <ul>
+                        <li><strong>一、品牌战略顶层设计</strong> — 30万<br>（增长顶层模式+闭门研讨会）</li>
+                        <li><strong>二、招商赋能系统</strong> — 58万<br>（招商大师营+4场招商会+工具包）</li>
+                        <li><strong>三、营销节点引爆</strong> — 45万<br>（4大节点+年度大场+高端活动+品牌提升）</li>
+                        <li><strong>四、品牌商学院体系</strong> — 39.8万<br>（5大课程：新店/预售/店主/流量/领导力）</li>
+                        <li>+ 季度服务包全量内容</li>
+                        <li>+ 专属运营团队≥4人驻场</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 16px; background: #E8F5E9; border-radius: 8px; font-size: 14px;">
+                        <strong>核心交付：</strong>一年内完成本地生活体系化+招商模式升级，实现流量6倍增长+千店裂变框架
+                    </div>
+                </div>
+                
+                <div class="card card-accent">
+                    <h3>💰 团单抽佣</h3>
+                    <p style="margin-bottom: 16px;"><strong>适用：</strong>与以上方案叠加，利益深度绑定</p>
+                    <ul>
+                        <li>按团单GMV的一定比例抽佣</li>
+                        <li>越做越多，随流量增长自动放大</li>
+                        <li>品牌方与运营方利益完全一致</li>
+                        <li>抽佣比例阶梯式：基础门槛内低比例，超额部分高比例</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 16px; background: #F1F8E9; border-radius: 8px; font-size: 14px;">
+                        <strong>核心逻辑：</strong>我们赚的是帮品牌多赚的那部分，而不是从品牌口袋里掏钱
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 28px; background: var(--bg-white); border-radius: 12px; box-shadow: 0 2px 12px rgba(46, 125, 50, 0.08); text-align: center;">
+                <p style="font-size: 18px; color: var(--text-dark); font-weight: 600; margin-bottom: 12px;">合作节奏建议</p>
+                <p style="font-size: 15px; color: var(--text-gray); line-height: 2;;">
+                    <span class="tag-highlight">月份6月</span> 季度合作验证 → 跑通模型、验证ROI
+                    <span class="tag-highlight">7月-8月</span> 升级年度合作 → 全量铺开、双引擎协同
+                    <span class="tag-highlight">持续</span> 团单抽佣叠加 → 利益绑定、长期共赢
+                </p>
+            </div>
+        </section>
+
+
+    </div>
+
+    <script>
+        // 导航更新
+        function updateNav() {
+            const slides = document.querySelectorAll('.slide');
+            const navItems = document.querySelectorAll('.nav-item');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                    navItems.forEach(item => item.classList.remove('active'));
+                    navItems[index]?.classList.add('active');
+                }
+            });
+        }
+        
+        // 滚动到指定幻灯片
+        function scrollToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides[index]?.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 滚动动画
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.card, .data-box, .checklist, .flywheel').forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
+        }
+        
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlide = Array.from(slides).findIndex(slide => {
+                const rect = slide.getBoundingClientRect();
+                return rect.top >= -100 && rect.top <= 100;
+            });
+            
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                scrollToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                scrollToSlide(currentSlide - 1);
+            }
+        });
+        
+        // 初始化
+        window.addEventListener('scroll', updateNav);
+        window.addEventListener('load', () => {
+            updateNav();
+            observeElements();
+        });
+    </script>
+</body>
+</html>
